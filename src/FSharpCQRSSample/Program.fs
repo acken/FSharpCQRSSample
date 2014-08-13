@@ -1,5 +1,3 @@
-#r "/home/ack/src/melin/fs/lib/JSONNet/Newtonsoft.Json.dll"
-
 open System
 open Newtonsoft.Json
 
@@ -41,7 +39,7 @@ module EventStore =
              |> Array.map (fun itm ->JsonConvert.DeserializeObject<'a>(itm))
         events
          |> Seq.fold apply initial
-'
+
 // All of task
 module Task =
     type TaskInfo = {
@@ -128,15 +126,22 @@ let handle cmd =
      | RenameTask(id, name) -> (id, name) |> Task.rename
 
 
-// ############################3 Testing it ############################################################
-// Create a new task and then rename it
-let id = System.Guid.NewGuid()
-let assignee = System.Guid.NewGuid()
-NewTask(id, {Name = "A new task"; Description = "This is a new task"; Duedate = DateTime.Now; Priority = 0; }, assignee) |> handle
-RenameTask(id, "This is a renamed task") |> handle
+// // ############################3 Testing it ############################################################
+// // Create a new task and then rename it
+// let id = System.Guid.NewGuid()
+// let assignee = System.Guid.NewGuid()
+// NewTask(id, {Name = "A new task"; Description = "This is a new task"; Duedate = DateTime.Now; Priority = 0; }, assignee) |> handle
+// RenameTask(id, "This is a renamed task") |> handle
+// 
+// // Output task from the event store
+// Task.read id
+// 
+// // Output all tasks from the event store
+// EventStore.store
+// 
+// module FSharpCQRSSample.Main
 
-// Output task from the event store
-Task.read id
-
-// Output all tasks from the event store
-EventStore.store
+[<EntryPoint>]
+let main args = 
+    Console.WriteLine("Nothing to run just yet. Probably set up nancy or something")
+    0
